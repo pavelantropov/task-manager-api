@@ -2,7 +2,7 @@
 
 namespace Antropov.TaskManager.Api.Models;
 
-public class Task
+public class TaskObject
 {
 	public string? Title { get; set; }
 	public string? Description { get; set; }
