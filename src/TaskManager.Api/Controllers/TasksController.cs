@@ -18,4 +18,19 @@ public class TasksController : Controller
 	{
 		_service = service;
 	}
+
+	[HttpPost("/")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public IActionResult CreateTask([FromBody] CreateTaskInput input)
+	{
+		var task = new TaskObject
+		{
+			Title = input.Title,
+			Description = input.Description,
+			Deadline = input.Deadline,
+		};
+		_service.CreateTask(task);
+		return Ok(input);
+	}
 }
