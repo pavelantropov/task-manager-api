@@ -4,5 +4,5 @@ namespace Antropov.TaskManager.Api.Services;
 
 public interface ITaskService
 {
-	void CreateTask(Task task);
+	void CreateTask(TaskObject task);
 }

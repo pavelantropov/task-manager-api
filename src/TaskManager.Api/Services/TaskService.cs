@@ -6,7 +6,7 @@ namespace Antropov.TaskManager.Api.Services;
 
 public class TaskService : ITaskService
 {
-	public void CreateTask(Task task)
+	public void CreateTask(TaskObject task)
 	{
 		throw new NotImplementedException();
 	}

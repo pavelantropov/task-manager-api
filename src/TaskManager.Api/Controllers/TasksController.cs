@@ -24,7 +24,7 @@ public class TasksController : Controller
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public IActionResult CreateTask([FromBody] CreateTaskInput input)
 	{
-		var task = new Task
+		var task = new TaskObject
 		{
 			Title = input.Title,
 			Description = input.Description,
