@@ -10,7 +10,7 @@ namespace Antropov.TaskManager.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
-public class TasksController
+public class TasksController : Controller
 {
 	private readonly ITaskService _service;
 
