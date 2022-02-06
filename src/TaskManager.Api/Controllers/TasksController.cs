@@ -26,10 +26,7 @@ public class TasksController : Controller
 	{
 		var tasks = _service.GetAllTasks();
 
-		if (tasks == null)
-			return BadRequest();
-
-		return Ok(tasks);
+		return tasks == null ? BadRequest() : Ok(tasks);
 	}
 
 	[HttpGet("/{taskId}")]
@@ -39,10 +36,7 @@ public class TasksController : Controller
 	{
 		var task = _service.GetTask(taskId);
 
-		if (task == null)
-			return BadRequest();
-
-		return Ok(task);
+		return task == null ? BadRequest() : Ok(task);
 	}
 
 	[HttpPost("/")]
