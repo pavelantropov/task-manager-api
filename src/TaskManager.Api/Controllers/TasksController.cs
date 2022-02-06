@@ -19,6 +19,32 @@ public class TasksController : Controller
 		_service = service;
 	}
 
+	[HttpGet]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public IActionResult GetAllTasks()
+	{
+		var tasks = _service.GetAllTasks();
+
+		if (tasks == null)
+			return BadRequest();
+
+		return Ok(tasks);
+	}
+
+	[HttpGet("/{taskId}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public IActionResult GetTask(int taskId)
+	{
+		var task = _service.GetTask(taskId);
+
+		if (task == null)
+			return BadRequest();
+
+		return Ok(task);
+	}
+
 	[HttpPost("/")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
