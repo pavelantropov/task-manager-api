@@ -40,6 +40,10 @@ public class TaskRepository : ITaskRepository
 		throw new NotImplementedException();
 	}
 
+	public void AddRange(List<TaskObject> tasks)
+	{
+	}
+
 	public void Update(int taskId, TaskObject task)
 	{
 		throw new NotImplementedException();
