@@ -17,16 +17,16 @@ public class TaskService : ITaskService
 
 	public List<TaskObject>? GetAllTasks()
 	{
-		throw new NotImplementedException();
+		return _repository.Tasks;
 	}
 
 	public TaskObject? GetTask(int taskId)
 	{
-		throw new NotImplementedException();
+		return _repository.Get(taskId);
 	}
 
 	public void CreateTask(TaskObject task)
 	{
-		throw new NotImplementedException();
+		_repository.Add(task);
 	}
 }
