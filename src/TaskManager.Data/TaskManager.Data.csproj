@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<WarningsAsErrors>Nullable</WarningsAsErrors>
+		<RootNamespace>Antropov.TaskManager.Data</RootNamespace>
+		<AssemblyName>Antropov.TaskManager.Data</AssemblyName>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="Repositories\" />
+	</ItemGroup>
+
+</Project>

@@ -17,4 +17,8 @@
 	  <Folder Include="Services\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\TaskManager.Data\TaskManager.Data.csproj" />
+	</ItemGroup>
+
 </Project>
