@@ -31,12 +31,12 @@ public class TasksController : Controller
 
 	[HttpGet("/{taskId}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
-	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public IActionResult GetTask(int taskId)
 	{
 		var task = _service.GetTask(taskId);
 
-		return task == null ? BadRequest() : Ok(task);
+		return task == null ? NotFound() : Ok(task);
 	}
 
 	[HttpPost("/")]
