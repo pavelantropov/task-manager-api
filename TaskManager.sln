@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Api", "src\TaskManager.Api\TaskManager.Api.csproj", "{F9C5EF17-6747-4F9F-A340-4D6802F26D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Api.Tests", "src\TaskManager.Api.Tests\TaskManager.Api.Tests.csproj", "{18BEAF3E-ABD1-48C2-B6AE-5E95427AAC39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Api.Tests", "src\TaskManager.Api.Tests\TaskManager.Api.Tests.csproj", "{18BEAF3E-ABD1-48C2-B6AE-5E95427AAC39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
