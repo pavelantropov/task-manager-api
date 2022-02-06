@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 using Antropov.TaskManager.Api.ApiModels;
 using Antropov.TaskManager.Api.Controllers;
-using Antropov.TaskManager.Api.Models;
 using Antropov.TaskManager.Api.Services;
+using Antropov.TaskManager.Data.Models;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;

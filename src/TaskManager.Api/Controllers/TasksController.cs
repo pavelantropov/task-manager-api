@@ -1,6 +1,6 @@
 ﻿using Antropov.TaskManager.Api.ApiModels;
-using Antropov.TaskManager.Api.Models;
 using Antropov.TaskManager.Api.Services;
+using Antropov.TaskManager.Data.Models;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using Antropov.TaskManager.Api.Models;
+using Antropov.TaskManager.Data.Models;
 
 namespace Antropov.TaskManager.Api.Services;
 
