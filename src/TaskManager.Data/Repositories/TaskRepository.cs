@@ -30,7 +30,7 @@ public class TaskRepository : ITaskRepository
 		_tasks = Data.Tasks;
 	}
 
-	public void Get(int taskId)
+	public TaskObject? Get(int taskId)
 	{
 		throw new NotImplementedException();
 	}
