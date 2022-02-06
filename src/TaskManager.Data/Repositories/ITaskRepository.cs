@@ -6,6 +6,8 @@ namespace Antropov.TaskManager.Data.Repositories;
 
 public interface ITaskRepository
 {
+	List<TaskObject> Tasks { get; set; }
+
 	TaskObject? Get(int taskId);
 	void Add(TaskObject task);
 	void AddRange(List<TaskObject> tasks);
