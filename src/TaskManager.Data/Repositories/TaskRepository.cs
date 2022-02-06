@@ -32,16 +32,17 @@ public class TaskRepository : ITaskRepository
 
 	public TaskObject? Get(int taskId)
 	{
-		throw new NotImplementedException();
+		return Tasks?.Find(o => o.TaskId == taskId);
 	}
 
 	public void Add(TaskObject task)
 	{
-		throw new NotImplementedException();
+		Tasks?.Add(task);
 	}
 
 	public void AddRange(List<TaskObject> tasks)
 	{
+		Tasks?.AddRange(tasks);
 	}
 
 	public void Update(int taskId, TaskObject task)
@@ -51,6 +52,8 @@ public class TaskRepository : ITaskRepository
 
 	public void Remove(int taskId)
 	{
-		throw new NotImplementedException();
+		var task = Get(taskId);
+		if (task != null)
+			Tasks?.Remove(task);
 	}
 }
