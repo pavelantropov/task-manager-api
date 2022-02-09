@@ -21,7 +21,7 @@ public class TaskService : ITaskService
 		_tasksCollection = mongoDatabase.GetCollection<TaskObject>(taskManagerDbSettings.Value.TasksCollectionName);
 	}
 
-	async public Task<List<TaskObject>?> GetAsync() =>
+	async public Task<List<TaskObject>> GetAsync() =>
 		await _tasksCollection.Find(_ => true).ToListAsync();
 
 	async public Task<TaskObject?> GetAsync(string id) => 
