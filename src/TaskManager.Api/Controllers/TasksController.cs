@@ -1,4 +1,6 @@
-﻿using Antropov.TaskManager.Api.ApiModels;
+﻿using System.Threading.Tasks;
+
+using Antropov.TaskManager.Api.ApiModels;
 using Antropov.TaskManager.Api.Services;
 using Antropov.TaskManager.Data.Models;
 
@@ -22,19 +24,19 @@ public class TasksController : Controller
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult GetAllTasks()
+	async public Task<IActionResult> GetAllTasks()
 	{
-		var tasks = _service.GetAllTasks();
+		var tasks = await _service.GetAsync();
 
-		return tasks == null ? BadRequest() : Ok(tasks);
+		return Ok(tasks);
 	}
 
 	[HttpGet("/{taskId}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
-	public IActionResult GetTask(int taskId)
+	async public Task<IActionResult> GetTask(string taskId)
 	{
-		var task = _service.GetTask(taskId);
+		var task = await _service.GetAsync(taskId);
 
 		return task == null ? NotFound() : Ok(task);
 	}
@@ -42,15 +44,16 @@ public class TasksController : Controller
 	[HttpPost]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult CreateTask([FromBody] CreateTaskInput input)
+	async public Task<IActionResult> CreateTask([FromBody] CreateTaskInput input)
 	{
 		var task = new TaskObject
 		{
 			Title = input.Title,
 			Description = input.Description,
 			Deadline = input.Deadline,
+			Labels = input.Labels,
 		};
-		_service.CreateTask(task);
+		await _service.CreateAsync(task);
 		return Ok(input);
 	}
 }
