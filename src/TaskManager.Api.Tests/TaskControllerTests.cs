@@ -42,7 +42,7 @@ namespace Antropov.TaskManager.Api.Tests
 		{
 			_serviceMock = new Mock<ITaskService>();
 			_controller = new TasksController(_serviceMock.Object);
-			var input = new CreateTaskInput
+			var input = new TaskInput
 			{
 				Title = "test",
 				Description = "test",
