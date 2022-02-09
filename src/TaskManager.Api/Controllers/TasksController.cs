@@ -39,7 +39,7 @@ public class TasksController : Controller
 		return task == null ? NotFound() : Ok(task);
 	}
 
-	[HttpPost("/")]
+	[HttpPost]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public IActionResult CreateTask([FromBody] CreateTaskInput input)
