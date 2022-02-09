@@ -7,6 +7,8 @@ using Antropov.TaskManager.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using Swashbuckle.AspNetCore.Annotations;
+
 namespace Antropov.TaskManager.Api.Controllers;
 
 [ApiController]
@@ -22,6 +24,7 @@ public class TasksController : Controller
 	}
 
 	[HttpGet]
+	[SwaggerOperation(Summary = "Returns all tasks from the database")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	async public Task<IActionResult> Get()
@@ -32,6 +35,7 @@ public class TasksController : Controller
 	}
 
 	[HttpGet("/{id:length(24)}")]
+	[SwaggerOperation(Summary = "Returns a task with the provided id from the database")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	async public Task<IActionResult> Get(string id)
@@ -42,6 +46,7 @@ public class TasksController : Controller
 	}
 
 	[HttpPost]
+	[SwaggerOperation(Summary = "Creates a task in the database")]
 	[ProducesResponseType(StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	async public Task<IActionResult> Create([FromBody] TaskInput input)
@@ -59,6 +64,7 @@ public class TasksController : Controller
 
 
 	[HttpPut("{id:length(24)}")]
+	[SwaggerOperation(Summary = "Updates a task with the provided id in the database")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Update(string id, TaskInput input)
@@ -85,6 +91,7 @@ public class TasksController : Controller
 	}
 
 	[HttpDelete("{id:length(24)}")]
+	[SwaggerOperation(Summary = "Removes a task with the provided id from the database")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> Delete(string id)
