@@ -24,6 +24,7 @@ builder.Services.AddSwaggerGen(options =>
 		Title = "Task Manager API",
 		Description = "An ASP.NET Core Web API for managing Tasks",
 	});
+	options.EnableAnnotations();
 });
 
 var app = builder.Build();
