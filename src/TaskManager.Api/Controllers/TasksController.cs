@@ -1,4 +1,6 @@
-﻿using Antropov.TaskManager.Api.ApiModels;
+﻿using System.Threading.Tasks;
+
+using Antropov.TaskManager.Api.ApiModels;
 using Antropov.TaskManager.Api.Services;
 using Antropov.TaskManager.Data.Models;
 
@@ -22,35 +24,80 @@ public class TasksController : Controller
 	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult GetAllTasks()
+	async public Task<IActionResult> Get()
 	{
-		var tasks = _service.GetAllTasks();
+		var tasks = await _service.GetAsync();
 
-		return tasks == null ? BadRequest() : Ok(tasks);
+		return Ok(tasks);
 	}
 
-	[HttpGet("/{taskId}")]
+	[HttpGet("/{id:length(24)}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
-	public IActionResult GetTask(int taskId)
+	async public Task<IActionResult> Get(string id)
 	{
-		var task = _service.GetTask(taskId);
+		var task = await _service.GetAsync(id);
 
 		return task == null ? NotFound() : Ok(task);
 	}
 
 	[HttpPost]
-	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult CreateTask([FromBody] CreateTaskInput input)
+	async public Task<IActionResult> Create([FromBody] TaskInput input)
 	{
-		var task = new TaskObject
+		var newTask = new TaskObject
 		{
 			Title = input.Title,
 			Description = input.Description,
 			Deadline = input.Deadline,
+			Labels = input.Labels,
 		};
-		_service.CreateTask(task);
-		return Ok(input);
+		await _service.CreateAsync(newTask);
+		return CreatedAtAction(nameof(Get), new { id = newTask.TaskId }, newTask);
+	}
+
+
+	[HttpPut("{id:length(24)}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<IActionResult> Update(string id, TaskInput input)
+	{
+		var task = await _service.GetAsync(id);
+
+		if (task is null)
+		{
+			return NotFound();
+		}
+
+		var updatedTask = new TaskObject
+		{
+			TaskId = task.TaskId,
+			Title = input.Title,
+			Description = input.Description,
+			Deadline = input.Deadline,
+			Labels = input.Labels,
+		};
+
+		await _service.UpdateAsync(id, updatedTask);
+
+		return Ok();
+	}
+
+	[HttpDelete("{id:length(24)}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	public async Task<IActionResult> Delete(string id)
+	{
+		var task = await _service.GetAsync(id);
+
+		if (task is null)
+		{
+			return NotFound();
+		}
+
+		await _service.RemoveAsync(id);
+
+		return Ok();
 	}
 }
