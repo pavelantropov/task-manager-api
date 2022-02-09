@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddTransient<ITaskService, TaskService>();
+builder.Services.AddSingleton<ITaskService, TaskService>();
 builder.Services.Configure<TaskManagerDbSettings>(
 	builder.Configuration.GetSection("TaskManagerDb"));
 
