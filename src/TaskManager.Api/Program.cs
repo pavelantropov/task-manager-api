@@ -42,7 +42,7 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 app.UseCors(options => 
-	options.WithOrigins("http://localhost:3000", "https://localhost:3001").AllowAnyMethod());
+	options.WithOrigins("http://localhost:3000", "https://localhost:3001").AllowAnyMethod().AllowAnyHeader());
 
 app.Run();
 
