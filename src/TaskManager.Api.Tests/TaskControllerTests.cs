@@ -38,7 +38,7 @@ namespace Antropov.TaskManager.Api.Tests
 
 		#region POST
 		[Test]
-		public void MockCreateTask_NoExceptionsThrown_ReturnsOk()
+		public async Task MockCreateTask_NoExceptionsThrown_ReturnsOk()
 		{
 			_serviceMock = new Mock<ITaskService>();
 			_controller = new TasksController(_serviceMock.Object);
@@ -48,25 +48,25 @@ namespace Antropov.TaskManager.Api.Tests
 				Description = "test",
 				Deadline = new DateTime(),
 			};
-			_serviceMock.Setup(o => o.CreateTask(It.IsAny<TaskObject>()));
+			_serviceMock.Setup(s => s.CreateAsync(It.IsAny<TaskObject>()));
 
-			var result = _controller.CreateTask(input);
-			var okResult = result as OkObjectResult;
+			var result = await _controller.Create(input);
+			var createdResult = result as CreatedAtActionResult;
 
-			Assert.IsNotNull(okResult);
-			Assert.AreEqual(200, okResult?.StatusCode);
+			Assert.IsNotNull(createdResult);
+			Assert.AreEqual(201, createdResult?.StatusCode);
 		}
 
 		[Test]
 		public async Task CreateTask_TaskAdded_ReturnsSuccess()
 		{
 			_serviceMock = new Mock<ITaskService>();
-			_serviceMock.Setup(o => o.CreateTask(It.IsAny<TaskObject>()));
+			_serviceMock.Setup(s => s.CreateAsync(It.IsAny<TaskObject>()));
 			_client = _factory.WithWebHostBuilder(builder =>
 					builder.ConfigureTestServices(services =>
 						services.AddScoped(_ => _serviceMock.Object)))
 				.CreateClient();
-			const string url = @"/";
+			const string url = @"api/tasks";
 			var data = new
 			{
 				Title = "test",
@@ -88,14 +88,14 @@ namespace Antropov.TaskManager.Api.Tests
 		public async Task CreateTask_TaskNotAdded_ReturnsErrorCode()
 		{
 			_serviceMock = new Mock<ITaskService>();
-			_serviceMock.Setup(o => o.CreateTask(It.IsAny<TaskObject>())).Throws<Exception>();
+			_serviceMock.Setup(s => s.CreateAsync(It.IsAny<TaskObject>())).Throws<Exception>();
 			_client = _factory.WithWebHostBuilder(builder =>
 					builder.ConfigureTestServices(services =>
 					{
 						services.AddScoped(_ => _serviceMock.Object);
 					}))
 				.CreateClient();
-			const string url = @"/";
+			const string url = @"api/tasks";
 			var data = new
 			{
 				Title = "test",

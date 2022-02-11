@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ITaskService, TaskService>();
 builder.Services.Configure<TaskManagerDbSettings>(
 	builder.Configuration.GetSection("TaskManagerDb"));
+builder.Services.AddCors();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,6 +41,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors(options => 
+	options.WithOrigins("http://localhost:3000", "https://localhost:3001").AllowAnyMethod().AllowAnyHeader());
 
 app.Run();
 
