@@ -10,13 +10,12 @@ public class TaskObject
 {
 	[BsonId]
 	[BsonRepresentation(BsonType.ObjectId)]
-	public string? TaskId { get; set; }
+	public string TaskId { get; set; } = null!;
 
-
-	public string? Title { get; set; }
+	public string Title { get; set; } = null!;
 	public string? Description { get; set; }
 	public DateTime? Deadline { get; set; }
 	public List<string>? Labels { get; set; }
 
-	public Project? Project { get; set; }
+	// public Project? Project { get; set; }
 }
